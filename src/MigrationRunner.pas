@@ -14,6 +14,7 @@ type
   private
     FScriptProducer : IScriptProducer;
     FDatabaseHandler : IDatabaseHandler;
+    procedure ApplyMigration(Script: TScript);
   public
     procedure Execute;
     constructor Create(ScriptProducer : IScriptProducer; DatabaseHandler : IDatabaseHandler); reintroduce; overload;
@@ -33,41 +34,38 @@ begin
   FDatabaseHandler := DatabaseHandler;
 end;
 
+procedure TMigrationRunner.ApplyMigration(Script: TScript);
+var
+  ErrorMessage: string;
+begin
+  try
+    FDatabaseHandler.RunScript(Script);
+    FDatabaseHandler.StoreMigration(Script);
+  except
+    on E: EDatabaseException do
+    begin
+      ErrorMessage := 'Failed to run migration for script:' + sLineBreak + 'Id = ' + IntToStr(Script.Id) + sLineBreak + 'Name = ' + Script.Name + sLineBreak + 'Script = CREATE TABLE' + Script.Script.Text + sLineBreak;
+      raise EMigrationException.Create(ErrorMessage);
+    end;
+  end;
+end;
+
 procedure TMigrationRunner.Execute;
 var
   Scripts : TList<TScript>;
-  Script: TObject;
+  Script: TScript;
   I: Integer;
-  ErrorMessage : String;
 begin
 
   Scripts := FScriptProducer.RetrieveScripts;
 
-  for I := 0 to Scripts.Count - 1 do
+  for Script in Scripts do
   begin
-    if FDatabaseHandler.IsApplied(Scripts.Items[I]) then
+    if FDatabaseHandler.IsApplied(Script) then
       Continue;
 
-    try
-
-      FDatabaseHandler.RunScript(Scripts.Items[I]);
-
-    except
-      on E : EDatabaseException do
-      begin
-
-        ErrorMessage := 'Failed to run migration for script:' + sLineBreak +
-                        'Id = 1' + sLineBreak +
-                        'Name = Create table' + sLineBreak +
-                        'Script = CREATE TABLE' + sLineBreak;
-
-        raise EMigrationException.Create(ErrorMessage);
-      end;
-    end;
-
-
+    ApplyMigration(Script);
   end;
-
 
 end;
 

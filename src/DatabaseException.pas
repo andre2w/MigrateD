@@ -6,7 +6,9 @@ uses
   System.SysUtils;
 
 type
-  EDatabaseException = class(Exception);
+
+  EDatabaseException = class(Exception)
+  end;
 
 implementation
 

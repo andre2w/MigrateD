@@ -22,8 +22,11 @@ type
     [TestCase]
     procedure RunAllMigrationsThereWereNotRan;
 
-    [TestCase] [WillRaise(EMigrationException)]
+    [TestCase]
     procedure ThrowExceptionWhenMigrationFails;
+
+    [TestCase]
+    procedure StoreMigrationAfterBeingRan;
   end;
 
 implementation
@@ -106,6 +109,30 @@ begin
   MigrationRunner.Execute;
 
   DatabaseHandler.Verify('Execute should call RunScript');
+end;
+
+procedure TestMigrationRunner.StoreMigrationAfterBeingRan;
+var
+  ScriptOne: TScript;
+  Scripts : TList<TScript>;
+begin
+  ScriptOne := TScript.Create;
+  ScriptOne.Id := 1;
+  ScriptOne.Name := 'Create table';
+  ScriptOne.Script := TStringList.Create;
+  ScriptOne.Script.Add('CREATE TABLE');
+
+  Scripts := TList<TScript>.Create;
+  Scripts.Add(ScriptOne);
+
+  ScriptProducer.Setup.WillReturn(TValue.From(Scripts)).When.RetrieveScripts;
+  DatabaseHandler.Setup.WillReturn(TValue.From(False)).When.IsApplied(ScriptOne);
+  DatabaseHandler.Setup.Expect.Once.When.StoreMigration(ScriptOne);
+
+
+  MigrationRunner.Execute;
+
+  DatabaseHandler.Verify('Execute should call StoreMigration');
 end;
 
 end.

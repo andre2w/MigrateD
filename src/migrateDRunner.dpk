@@ -35,6 +35,7 @@ contains
   MigrationRunner in 'MigrationRunner.pas',
   DatabaseHandler in 'DatabaseHandler.pas',
   DatabaseException in 'DatabaseException.pas',
-  ScriptProducer.RestProducer in 'ScriptProducer.RestProducer.pas';
+  ScriptProducer.RestProducer in 'ScriptProducer.RestProducer.pas',
+  FirebirdFDHandler in 'FirebirdFDHandler.pas';
 
 end.
