@@ -79,7 +79,28 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="TestMigrationRunnerUnit.pas"/>
-        <DCCReference Include="..\src\MigrationRunnerUnit.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.AutoMock.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Behavior.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Expectation.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Helpers.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Interfaces.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.MethodData.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.ObjectProxy.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.ParamMatcher.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Proxy.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Proxy.TypeInfo.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.ReturnTypePatch.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Utils.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Validation.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.VirtualInterface.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.VirtualMethodInterceptor.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.WeakReference.pas"/>
+        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.When.pas"/>
+        <DCCReference Include="Delphi-Mocks\Sample1Main.pas"/>
+        <DCCReference Include="..\src\MigrationRunner.pas"/>
+        <DCCReference Include="..\src\ScriptProducer.pas"/>
+        <DCCReference Include="..\src\DatabaseHandler.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -490,6 +511,7 @@
                 <Platform value="Linux64">False</Platform>
                 <Platform value="Win32">True</Platform>
             </Platforms>
+            <ModelSupport>False</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

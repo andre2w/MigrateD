@@ -12,7 +12,28 @@ uses
   DUnitX.Loggers.Xml.NUnit,
   DUnitX.TestFramework,
   TestMigrationRunnerUnit in 'TestMigrationRunnerUnit.pas',
-  MigrationRunnerUnit in '..\src\MigrationRunnerUnit.pas';
+  Delphi.Mocks.AutoMock in 'Delphi-Mocks\Delphi.Mocks.AutoMock.pas',
+  Delphi.Mocks.Behavior in 'Delphi-Mocks\Delphi.Mocks.Behavior.pas',
+  Delphi.Mocks.Expectation in 'Delphi-Mocks\Delphi.Mocks.Expectation.pas',
+  Delphi.Mocks.Helpers in 'Delphi-Mocks\Delphi.Mocks.Helpers.pas',
+  Delphi.Mocks.Interfaces in 'Delphi-Mocks\Delphi.Mocks.Interfaces.pas',
+  Delphi.Mocks.MethodData in 'Delphi-Mocks\Delphi.Mocks.MethodData.pas',
+  Delphi.Mocks.ObjectProxy in 'Delphi-Mocks\Delphi.Mocks.ObjectProxy.pas',
+  Delphi.Mocks.ParamMatcher in 'Delphi-Mocks\Delphi.Mocks.ParamMatcher.pas',
+  Delphi.Mocks in 'Delphi-Mocks\Delphi.Mocks.pas',
+  Delphi.Mocks.Proxy in 'Delphi-Mocks\Delphi.Mocks.Proxy.pas',
+  Delphi.Mocks.Proxy.TypeInfo in 'Delphi-Mocks\Delphi.Mocks.Proxy.TypeInfo.pas',
+  Delphi.Mocks.ReturnTypePatch in 'Delphi-Mocks\Delphi.Mocks.ReturnTypePatch.pas',
+  Delphi.Mocks.Utils in 'Delphi-Mocks\Delphi.Mocks.Utils.pas',
+  Delphi.Mocks.Validation in 'Delphi-Mocks\Delphi.Mocks.Validation.pas',
+  Delphi.Mocks.VirtualInterface in 'Delphi-Mocks\Delphi.Mocks.VirtualInterface.pas',
+  Delphi.Mocks.VirtualMethodInterceptor in 'Delphi-Mocks\Delphi.Mocks.VirtualMethodInterceptor.pas',
+  Delphi.Mocks.WeakReference in 'Delphi-Mocks\Delphi.Mocks.WeakReference.pas',
+  Delphi.Mocks.When in 'Delphi-Mocks\Delphi.Mocks.When.pas',
+  Sample1Main in 'Delphi-Mocks\Sample1Main.pas',
+  MigrationRunner in '..\src\MigrationRunner.pas',
+  ScriptProducer in '..\src\ScriptProducer.pas',
+  DatabaseHandler in '..\src\DatabaseHandler.pas';
 
 var
   runner : ITestRunner;

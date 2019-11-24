@@ -77,7 +77,9 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="rtl.dcp"/>
-        <DCCReference Include="MigrationRunnerUnit.pas"/>
+        <DCCReference Include="ScriptProducer.pas"/>
+        <DCCReference Include="MigrationRunner.pas"/>
+        <DCCReference Include="DatabaseHandler.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

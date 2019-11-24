@@ -31,6 +31,8 @@ requires
   rtl;
 
 contains
-  MigrationRunnerUnit in 'MigrationRunnerUnit.pas';
+  ScriptProducer in 'ScriptProducer.pas',
+  MigrationRunner in 'MigrationRunner.pas',
+  DatabaseHandler in 'DatabaseHandler.pas';
 
 end.
