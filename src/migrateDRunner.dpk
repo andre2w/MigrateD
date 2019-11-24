@@ -1,4 +1,4 @@
-package migrateD;
+package migrateDRunner;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
@@ -29,5 +29,8 @@ package migrateD;
 
 requires
   rtl;
+
+contains
+  MigrationRunnerUnit in 'MigrationRunnerUnit.pas';
 
 end.

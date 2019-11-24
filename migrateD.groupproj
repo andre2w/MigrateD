@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E32F4229-94E9-4DDC-AE45-C0AF2C541329}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="src\migrateDRunner.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="test\migrateDTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="migrateDRunner">
+        <MSBuild Projects="src\migrateDRunner.dproj"/>
+    </Target>
+    <Target Name="migrateDRunner:Clean">
+        <MSBuild Projects="src\migrateDRunner.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="migrateDRunner:Make">
+        <MSBuild Projects="src\migrateDRunner.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="migrateDTest">
+        <MSBuild Projects="test\migrateDTest.dproj"/>
+    </Target>
+    <Target Name="migrateDTest:Clean">
+        <MSBuild Projects="test\migrateDTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="migrateDTest:Make">
+        <MSBuild Projects="test\migrateDTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="migrateDRunner;migrateDTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="migrateDRunner:Clean;migrateDTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="migrateDRunner:Make;migrateDTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
