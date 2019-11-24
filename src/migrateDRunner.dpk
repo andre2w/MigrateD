@@ -33,6 +33,8 @@ requires
 contains
   ScriptProducer in 'ScriptProducer.pas',
   MigrationRunner in 'MigrationRunner.pas',
-  DatabaseHandler in 'DatabaseHandler.pas';
+  DatabaseHandler in 'DatabaseHandler.pas',
+  DatabaseException in 'DatabaseException.pas',
+  ScriptProducer.RestProducer in 'ScriptProducer.RestProducer.pas';
 
 end.

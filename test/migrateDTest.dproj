@@ -101,6 +101,9 @@
         <DCCReference Include="..\src\MigrationRunner.pas"/>
         <DCCReference Include="..\src\ScriptProducer.pas"/>
         <DCCReference Include="..\src\DatabaseHandler.pas"/>
+        <DCCReference Include="..\src\DatabaseException.pas"/>
+        <DCCReference Include="TestRestProducer.pas"/>
+        <DCCReference Include="..\src\ScriptProducer.RestProducer.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

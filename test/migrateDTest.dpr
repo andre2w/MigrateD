@@ -33,7 +33,10 @@ uses
   Sample1Main in 'Delphi-Mocks\Sample1Main.pas',
   MigrationRunner in '..\src\MigrationRunner.pas',
   ScriptProducer in '..\src\ScriptProducer.pas',
-  DatabaseHandler in '..\src\DatabaseHandler.pas';
+  DatabaseHandler in '..\src\DatabaseHandler.pas',
+  DatabaseException in '..\src\DatabaseException.pas',
+  TestRestProducer in 'TestRestProducer.pas',
+  ScriptProducer.RestProducer in '..\src\ScriptProducer.RestProducer.pas';
 
 var
   runner : ITestRunner;
