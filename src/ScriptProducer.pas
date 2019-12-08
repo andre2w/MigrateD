@@ -12,6 +12,7 @@ type
     Id : Integer;
     Name : string;
     Script : TStrings;
+    function SQL : string;
   end;
 
   {$M+}
@@ -21,5 +22,12 @@ type
   end;
 
 implementation
+
+{ TScript }
+
+function TScript.SQL: string;
+begin
+  Script.Text;
+end;
 
 end.

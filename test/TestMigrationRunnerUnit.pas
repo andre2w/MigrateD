@@ -24,16 +24,12 @@ type
     procedure TearDown;
     [TestCase]
     procedure RunAllMigrationsThereWereNotApplied;
-
     [TestCase]
     procedure ThrowExceptionWhenMigrationFails;
-
     [TestCase]
     procedure StoreMigrationAfterBeingApplied;
-
     [TestCase]
     procedure CommitScriptWhenMigrationIsApplied;
-
     [TestCase]
     procedure RollbackWhenMigrationFails;
   end;
@@ -88,7 +84,7 @@ begin
   ErrorMessage := 'Failed to run migration for script:' + sLineBreak +
                   'Id = ' + IntToStr( ScriptOne.Id ) + sLineBreak +
                   'Name = ' + ScriptOne.Name + sLineBreak +
-                  'Script = ' + ScriptOne.Script.Text + sLineBreak;
+                  'Script = ' + ScriptOne.SQL;
 
   Assert.WillRaise(MigrationRunner.Execute, EMigrationException, ErrorMessage);
 end;
@@ -111,10 +107,11 @@ begin
   ScriptProducer.Setup.WillReturn(TValue.From(Scripts)).When.RetrieveScripts;
   DatabaseHandler.Setup.WillReturn(TValue.From(True)).When.IsApplied(ScriptOne);
   DatabaseHandler.Setup.WillReturn(TValue.From(False)).When.IsApplied(ScriptTwo);
+  DatabaseHandler.Setup.WillRaise(EDatabaseException).When.RunScript(ScriptTwo);
   DatabaseHandler.Setup.Expect.Once.When.Rollback;
   DatabaseHandler.Setup.Expect.Once.When.StartTransaction;
 
-  MigrationRunner.Execute;
+  Assert.WillRaise(MigrationRunner.Execute, EMigrationException);
 
   DatabaseHandler.Verify('Execute should call Rollback');
 end;

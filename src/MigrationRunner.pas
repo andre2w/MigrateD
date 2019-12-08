@@ -54,7 +54,10 @@ begin
     on E: EDatabaseException do
     begin
       FDatabaseHandler.Rollback;
-      ErrorMessage := 'Failed to run migration for script:' + sLineBreak + 'Id = ' + IntToStr(Script.Id) + sLineBreak + 'Name = ' + Script.Name + sLineBreak + 'Script = CREATE TABLE' + Script.Script.Text + sLineBreak;
+      ErrorMessage := 'Failed to run migration for script:' + sLineBreak +
+                      'Id = ' + IntToStr(Script.Id) + sLineBreak +
+                      'Name = ' + Script.Name + sLineBreak +
+                      'Script = CREATE TABLE' + Script.SQL;
       raise EMigrationException.Create(ErrorMessage);
     end;
   end;
