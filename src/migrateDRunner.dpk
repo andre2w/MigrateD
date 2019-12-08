@@ -28,7 +28,15 @@ package migrateDRunner;
 {$IMPLICITBUILD ON}
 
 requires
-  rtl;
+  rtl,
+  dbrtl,
+  CustomIPTransport,
+  FireDAC,
+  FireDACCommonDriver,
+  FireDACCommon,
+  bindengine,
+  FireDACIBDriver,
+  bindcomp;
 
 contains
   ScriptProducer in 'ScriptProducer.pas',
@@ -36,6 +44,6 @@ contains
   DatabaseHandler in 'DatabaseHandler.pas',
   DatabaseException in 'DatabaseException.pas',
   ScriptProducer.RestProducer in 'ScriptProducer.RestProducer.pas',
-  FirebirdFDHandler in 'FirebirdFDHandler.pas';
+  DatabaseHandler.FirebirdFDHandler in 'DatabaseHandler.FirebirdFDHandler.pas';
 
 end.

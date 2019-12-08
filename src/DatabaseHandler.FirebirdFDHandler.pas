@@ -28,6 +28,7 @@ type
     function IsApplied(Script : TScript) : Boolean;
     constructor Create(DatabaseInfo : DatabaseInfo); overload;
     procedure StoreMigration(Script : TScript);
+    procedure Commit;
   end;
 
 implementation
@@ -36,6 +37,11 @@ uses
   System.SysUtils, DatabaseException, FireDAC.Stan.Error;
 
 { TFirebirdFDHandler }
+
+procedure TFirebirdFDHandler.Commit;
+begin
+  FDatabase.Commit;
+end;
 
 constructor TFirebirdFDHandler.Create(DatabaseInfo: DatabaseInfo);
 begin
@@ -59,8 +65,6 @@ end;
 
 procedure TFirebirdFDHandler.RunScript(Script: TScript);
 begin
-  if not FDatabase.InTransaction then
-    FDatabase.StartTransaction;
 
   try
     FScriptExecutor.ExecuteScript(Script.Script);
@@ -72,9 +76,6 @@ begin
     end;
 
   end;
-
-  if not FDatabase.InTransaction then
-    FDatabase.Commit;
 
 end;
 
@@ -152,7 +153,17 @@ end;
 
 procedure TFirebirdFDHandler.StoreMigration(Script: TScript);
 begin
-
+  with FQuery,SQL do
+  begin
+    Clear;
+    Close;
+    Add('INSERT INTO SCRIPTS (ID, NOME, DATAHORA_EXECUCAO) ');
+    Add('VALUES (:ID, :NOME, :DATAHORA_EXECUCAO);');
+    ParamByName('ID').AsInteger := Script.Id;
+    ParamByName('NOME').AsString := Script.Name;
+    ParamByName('DATAHORA_EXECUCAO').AsDateTime := Now;
+    ExecSQL;
+  end;
 end;
 
 end.

@@ -14,6 +14,9 @@ type
     procedure RunScript(Script : TScript);
     function IsApplied(Script : TScript) : Boolean;
     procedure StoreMigration(Script : TScript);
+    procedure StartTransaction;
+    procedure Commit;
+    procedure Rollback;
   end;
 
 implementation

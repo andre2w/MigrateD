@@ -39,11 +39,21 @@ var
   ErrorMessage: string;
 begin
   try
-    FDatabaseHandler.RunScript(Script);
-    FDatabaseHandler.StoreMigration(Script);
+
+    with FDatabaseHandler do
+    begin
+      StartTransaction;
+
+      RunScript(Script);
+      StoreMigration(Script);
+
+      Commit;
+    end;
+
   except
     on E: EDatabaseException do
     begin
+      FDatabaseHandler.Rollback;
       ErrorMessage := 'Failed to run migration for script:' + sLineBreak + 'Id = ' + IntToStr(Script.Id) + sLineBreak + 'Name = ' + Script.Name + sLineBreak + 'Script = CREATE TABLE' + Script.Script.Text + sLineBreak;
       raise EMigrationException.Create(ErrorMessage);
     end;
