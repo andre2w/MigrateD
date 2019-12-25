@@ -3,7 +3,7 @@ unit ScriptProducer.RestProducer;
 interface
 
 uses
-  ScriptProducer, System.Generics.Collections, REST.Client, System.JSON;
+  ScriptProducer, System.Generics.Collections, REST.Client, System.JSON, IPPeerClient;
 
 type
 
@@ -20,7 +20,7 @@ type
     FRequest : TRESTRequest;
     FResponse: TRESTResponse;
   public
-    constructor Create(const URL : string); reintroduce; overload;
+    constructor Create(const URL : string); reintroduce;
     procedure AddQueryParamter(Key, Value : String);
     procedure AddHeader(Key, Value : String);
     function  ExecuteGetRequest : String;
@@ -61,12 +61,11 @@ begin
   ScriptsPayload := FHTTPClient.ExecuteGetRequest;
   Scripts := TList<TScript>.Create;
   
-  JsonPayload := TJSONArray(TJSONObject.ParseJSONValue(ScriptsPayload));
+  JsonPayload := TJSONObject.ParseJSONValue(ScriptsPayload) as TJSONArray;
   
   for I := 0 to JsonPayload.Count - 1 do
   begin
     JObj := JsonPayload.Items[i] as TJSONObject;
-    debug :=  JObj.ToString;  
 
     Script := TScript.Create;
     Script.Id := StrToInt(JObj.GetValue('id').Value);

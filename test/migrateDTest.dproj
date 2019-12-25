@@ -104,6 +104,7 @@
         <DCCReference Include="..\src\DatabaseException.pas"/>
         <DCCReference Include="TestRestProducer.pas"/>
         <DCCReference Include="..\src\ScriptProducer.RestProducer.pas"/>
+        <DCCReference Include="TestHTTPClient.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -1,0 +1,36 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "/api/scripts?api_token=asdf123"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": [
+          {
+            "id": 15,
+            "name": "Adiciona Custo Boleto na conta corrente",
+            "script": "ALTER TABLE CONTA_CORRENTE\\r\\nADD CUSTO_BOLETO DECIMAL(10,2);",
+            "created_at": "2016-08-15T11:48:53.193Z"
+          },
+          {
+            "id": 16,
+            "name": "Adiciona COD_PESSOA_TITULAR na CONTA_CORRENTE",
+            "script": "ALTER TABLE CONTA_CORRENTE\\r\\nADD COD_PESSOA_TITULAR INTEGER;\\r\\n",
+            "created_at": "2016-08-15T11:49:17.974Z"
+          },
+          {
+            "id": 17,
+            "name": "FK COD_PESSOA_TITULAR",
+            "script": "alter table CONTA_CORRENTE\\r\\nadd constraint FK_CC_PESSOA_TITULAR\\r\\nforeign key (COD_PESSOA_TITULAR)\\r\\nreferences PESSOA(PES_CODIGO);\\r\\n",
+            "created_at": "2016-08-15T11:49:46.982Z"
+          }
+        ]
+      }
+    }
+  ]
+}
