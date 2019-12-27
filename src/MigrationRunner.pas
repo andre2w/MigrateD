@@ -60,6 +60,13 @@ begin
                       'Script = CREATE TABLE' + Script.SQL;
       raise EMigrationException.Create(ErrorMessage);
     end;
+
+    on E: EDuplicatedMigration do
+    begin
+      FDatabaseHandler.StoreMigration(Script);
+      FDatabaseHandler.Commit;
+    end;
+
   end;
 end;
 

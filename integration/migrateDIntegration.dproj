@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{C7708D87-A06F-48A5-8CB4-A7EA07372E70}</ProjectGuid>
+        <ProjectGuid>{394B581C-AF13-4226-8A0D-F263D155BF4C}</ProjectGuid>
         <ProjectVersion>18.2</ProjectVersion>
         <FrameworkType>None</FrameworkType>
-        <MainSource>migrateDTest.dpr</MainSource>
+        <MainSource>migrateDIntegration.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -48,7 +48,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <DCC_UnitSearchPath>$(DUnitX);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <SanitizedProjectName>migrateDTest</SanitizedProjectName>
+        <SanitizedProjectName>migrateDIntegration</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;DataSnapFireDAC;svnui;tethering;dclRBDBE1925;FireDACADSDriver;rbRIDE1925;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;svn;Intraweb;DBXOracleDriver;inetdb;ACBr_Diversos;rbTC1925;FmxTeeUI;emsedge;rbIDE1925;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;Package1;ACBr_PCNComum;DataSnapConnectors;VCLRESTComponents;rbTCUI1925;rbFireDAC1925;rbRTL1925;rbDB1925;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;dclRBFireDAC1925;FireDACCommonODBC;dclRBE1925;DataSnapClient;rbRCL1925;bindcompdbx;IndyIPCommon;ACBr_TCP;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;ACBr_Integrador;dsnapcon;ACBr_synapse;rbDBE1925;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;TeeDB;dclRBIBE1925;emshosting;ACBr_Comum;ACBr_BoletoRL;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;DbxCommonDriver;rbUSER1925;rbDIDE1925;ibxpress;Tee;rbADO1925;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;FireDACDSDriver;DbxClientDriver;rbUSERDesign1925;DBXSybaseASADriver;rbRest1925;CustomIPTransport;vcldsnap;rbIBE1925;ACBr_OpenSSL;rbRAP1925;bindcomp;appanalytics;DBXInformixDriver;rbDAD1925;IndyIPClient;rbBDE1925;frce;bindcompvcl;TeeUI;rbCIDE1925;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;ACBr_Boleto;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;dclRBADO1925;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -78,32 +78,9 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="TestMigrationRunnerUnit.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.AutoMock.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Behavior.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Expectation.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Helpers.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Interfaces.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.MethodData.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.ObjectProxy.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.ParamMatcher.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Proxy.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Proxy.TypeInfo.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.ReturnTypePatch.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Utils.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.Validation.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.VirtualInterface.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.VirtualMethodInterceptor.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.WeakReference.pas"/>
-        <DCCReference Include="Delphi-Mocks\Delphi.Mocks.When.pas"/>
-        <DCCReference Include="Delphi-Mocks\Sample1Main.pas"/>
-        <DCCReference Include="..\src\MigrationRunner.pas"/>
-        <DCCReference Include="..\src\ScriptProducer.pas"/>
-        <DCCReference Include="..\src\DatabaseHandler.pas"/>
-        <DCCReference Include="..\src\DatabaseException.pas"/>
-        <DCCReference Include="TestRestProducer.pas"/>
         <DCCReference Include="..\src\ScriptProducer.RestProducer.pas"/>
+        <DCCReference Include="..\src\ScriptProducer.pas"/>
+        <DCCReference Include="TestHTTPClient.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -122,7 +99,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">migrateDTest.dpr</Source>
+                    <Source Name="MainSource">migrateDIntegration.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -146,9 +123,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\migrateDTest.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\migrateDIntegration.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>migrateDTest.exe</RemoteName>
+                        <RemoteName>migrateDIntegration.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -514,7 +491,6 @@
                 <Platform value="Linux64">False</Platform>
                 <Platform value="Win32">True</Platform>
             </Platforms>
-            <ModelSupport>False</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

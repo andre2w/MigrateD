@@ -70,3 +70,5 @@ modules/
 # End of https://www.gitignore.io/api/delphi
 test/Win32/Debug/dunitx-results.xml
 test/Win32/
+integration/Win32
+TEST.FDB

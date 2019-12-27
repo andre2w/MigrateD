@@ -36,8 +36,7 @@ uses
   DatabaseHandler in '..\src\DatabaseHandler.pas',
   DatabaseException in '..\src\DatabaseException.pas',
   TestRestProducer in 'TestRestProducer.pas',
-  ScriptProducer.RestProducer in '..\src\ScriptProducer.RestProducer.pas',
-  TestHTTPClient in 'TestHTTPClient.pas';
+  ScriptProducer.RestProducer in '..\src\ScriptProducer.RestProducer.pas';
 
 var
   runner : ITestRunner;

@@ -9,6 +9,9 @@
         <Projects Include="test\migrateDTest.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="integration\migrateDIntegration.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="migrateDTest:Make">
         <MSBuild Projects="test\migrateDTest.dproj" Targets="Make"/>
     </Target>
+    <Target Name="migrateDIntegration">
+        <MSBuild Projects="integration\migrateDIntegration.dproj"/>
+    </Target>
+    <Target Name="migrateDIntegration:Clean">
+        <MSBuild Projects="integration\migrateDIntegration.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="migrateDIntegration:Make">
+        <MSBuild Projects="integration\migrateDIntegration.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="migrateDRunner;migrateDTest"/>
+        <CallTarget Targets="migrateDRunner;migrateDTest;migrateDIntegration"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="migrateDRunner:Clean;migrateDTest:Clean"/>
+        <CallTarget Targets="migrateDRunner:Clean;migrateDTest:Clean;migrateDIntegration:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="migrateDRunner:Make;migrateDTest:Make"/>
+        <CallTarget Targets="migrateDRunner:Make;migrateDTest:Make;migrateDIntegration:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

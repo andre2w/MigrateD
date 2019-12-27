@@ -32,6 +32,8 @@ type
     procedure CommitScriptWhenMigrationIsApplied;
     [TestCase]
     procedure RollbackWhenMigrationFails;
+    [TestCase]
+    procedure ShouldAllowDuplicatedMigrationToBeStored;
   end;
 
 implementation
@@ -63,6 +65,25 @@ begin
   Scripts := TList<TScript>.Create;
   Scripts.Add(ScriptOne);
   Scripts.Add(ScriptTwo);
+
+end;
+
+procedure TestMigrationRunner.ShouldAllowDuplicatedMigrationToBeStored;
+begin
+
+  ScriptProducer.Setup.WillReturn(TValue.From(Scripts)).When.RetrieveScripts;
+  with DatabaseHandler.Setup do
+  begin
+    WillReturn(TValue.From(False)).When.IsApplied(ScriptOne);
+    WillReturn(TValue.From(False)).When.IsApplied(ScriptTwo);
+    WillRaise(EDuplicatedMigration).When.RunScript(ScriptOne);
+    Expect.Once.When.StoreMigration(ScriptOne);
+    Expect.AtLeastOnce.When.Commit;
+  end;
+
+  MigrationRunner.Execute;
+
+  DatabaseHandler.Verify('Execute saves ScriptOne');
 
 end;
 
