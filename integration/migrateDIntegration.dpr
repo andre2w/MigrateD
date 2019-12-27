@@ -13,7 +13,11 @@ uses
   DUnitX.TestFramework,
   ScriptProducer.RestProducer in '..\src\ScriptProducer.RestProducer.pas',
   ScriptProducer in '..\src\ScriptProducer.pas',
-  TestHTTPClient in 'TestHTTPClient.pas';
+  TestHTTPClient in 'TestHTTPClient.pas',
+  TestFirebirdFDHandler in 'TestFirebirdFDHandler.pas',
+  DatabaseException in '..\src\DatabaseException.pas',
+  DatabaseHandler.FirebirdFDHandler in '..\src\DatabaseHandler.FirebirdFDHandler.pas',
+  DatabaseHandler in '..\src\DatabaseHandler.pas';
 
 var
   runner : ITestRunner;

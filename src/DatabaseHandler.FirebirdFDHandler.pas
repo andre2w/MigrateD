@@ -4,7 +4,9 @@ interface
 
 uses
   Data.DB, DatabaseHandler, ScriptProducer, FireDAC.Stan.Param,
-  FireDAC.Comp.Client, FireDAC.Phys.FB, FireDAC.Comp.Script;
+  FireDAC.Comp.Client, FireDAC.Phys.FB, FireDAC.Comp.Script,
+  FireDAC.Comp.ScriptCommands, FireDAC.Stan.Def, FireDAC.DApt,
+  FireDAC.Stan.Async;
 
 type
 
@@ -29,6 +31,8 @@ type
     constructor Create(DatabaseInfo : DatabaseInfo); overload;
     procedure StoreMigration(Script : TScript);
     procedure Commit;
+    procedure StartTransaction;
+    procedure Rollback;
   end;
 
 implementation
@@ -63,10 +67,16 @@ begin
   Result := not FQuery.IsEmpty;
 end;
 
+procedure TFirebirdFDHandler.Rollback;
+begin
+  FDatabase.Rollback;
+end;
+
 procedure TFirebirdFDHandler.RunScript(Script: TScript);
 begin
 
   try
+
     FScriptExecutor.ExecuteScript(Script.Script);
   except
 
@@ -130,11 +140,11 @@ begin
     begin
       Clear;
       Close;
-      Add('CREATE TABLE SCRIPTS (        ');
-      Add(' ID INTEGER,                  ');
-      Add(' NOME VARCHAR(50),            ');
-      Add(' DATAHORA_EXECUCAO TIMESTAMP  ');
-      Add(');                            ');
+      Add('CREATE TABLE SCRIPTS (         ');
+      Add(' ID INTEGER,                   ');
+      Add(' NAME VARCHAR(50),             ');
+      Add(' EXECUTION_TIMESTAMP TIMESTAMP ');
+      Add(');                             ');
       ExecSQL;
     end;
 
@@ -151,17 +161,22 @@ begin
 
 end;
 
+procedure TFirebirdFDHandler.StartTransaction;
+begin
+  FDatabase.StartTransaction;
+end;
+
 procedure TFirebirdFDHandler.StoreMigration(Script: TScript);
 begin
   with FQuery,SQL do
   begin
     Clear;
     Close;
-    Add('INSERT INTO SCRIPTS (ID, NOME, DATAHORA_EXECUCAO) ');
-    Add('VALUES (:ID, :NOME, :DATAHORA_EXECUCAO);');
+    Add('INSERT INTO SCRIPTS (ID, NAME, EXECUTION_TIMESTAMP) ');
+    Add('VALUES (:ID, :NAME, :EXECUTION_TIMESTAMP);');
     ParamByName('ID').AsInteger := Script.Id;
-    ParamByName('NOME').AsString := Script.Name;
-    ParamByName('DATAHORA_EXECUCAO').AsDateTime := Now;
+    ParamByName('NAME').AsString := Script.Name;
+    ParamByName('EXECUTION_TIMESTAMP').AsDateTime := Now;
     ExecSQL;
   end;
 end;
